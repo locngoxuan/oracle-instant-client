@@ -1,6 +1,6 @@
 FROM debian:testing
 
-LABEL maintainer="t.gulacsi@unosoft.hu"
+LABEL maintainer="xuanloc0511@gmail.com"
 
 ENV DEBIAN_FRONTEND noninteractive
 
