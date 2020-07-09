@@ -1,0 +1,20 @@
+FROM debian:testing
+
+LABEL maintainer="xuanloc0511@gmail.com"
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update && apt-get install -y libaio1 wget unzip
+
+RUN wget -O /tmp/instantclient-basic-linux-x64.zip https://download.oracle.com/otn_software/linux/instantclient/193000/instantclient-basic-linux.x64-19.3.0.0.0dbru.zip \
+	&& wget -O /tmp/instantclient-sqlplus-linux-x64.zip https://download.oracle.com/otn_software/linux/instantclient/193000/instantclient-sqlplus-linux.x64-19.3.0.0.0dbru.zip
+
+RUN mkdir -p /usr/lib/oracle && unzip /tmp/instantclient-basic-linux-x64.zip -d /usr/lib/oracle \
+	&& unzip /tmp/instantclient-sqlplus-linux-x64.zip -d /usr/lib/oracle
+
+ENV ORACLE_HOME=/usr/lib/oracle/instantclient_19_3
+ENV PATH=$ORACLE_HOME:${PATH}
+ENV LD_LIBRARY_PATH=$ORACLE_HOME
+
+RUN ldconfig -v /usr/lib/oracle/instantclient_19_3
+RUN ldd /usr/lib/oracle/instantclient_19_3/libclntsh.so
