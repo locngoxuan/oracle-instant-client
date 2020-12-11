@@ -1,10 +1,10 @@
-FROM debian:testing
+FROM debian:stable-slim
 
 LABEL maintainer="xuanloc0511@gmail.com"
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update && apt-get install -y libaio1 wget unzip
+RUN apt-get update && apt-get install -y libaio1 wget unzip curl
 
 RUN wget -O /tmp/instantclient-basic-linux-x64.zip https://download.oracle.com/otn_software/linux/instantclient/193000/instantclient-basic-linux.x64-19.3.0.0.0dbru.zip \
 	&& wget -O /tmp/instantclient-sqlplus-linux-x64.zip https://download.oracle.com/otn_software/linux/instantclient/193000/instantclient-sqlplus-linux.x64-19.3.0.0.0dbru.zip
